@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'DecimaMonoPro', sans-serif;
+}
+body{
+  background: #F2EFE8;
+}
+
+
+img {
+  vertical-align: middle;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container{
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* =============  fonts  =============== */
+@font-face {
+  font-family: 'DecimaMonoPro';
+  src: url('./assets/fonts/DecimaMonoProLt.otf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DecimaMonoPro';
+  src: url('./assets/fonts/DecimaMonoPro.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DecimaMonoPro';
+  src: url('./assets/fonts/DecimaMonoPro-Bold.otf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}

@@ -1,0 +1,59 @@
+.animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    // background: #000;
+    overflow: hidden;
+  }
+  
+  .circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #222 60%, transparent 100%);
+    border-radius: 50%;
+  }
+  
+  .circle-text {
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    transform-origin: center;
+    
+    /* Updated transform */
+    transform: rotate(calc(var(--index) * (360deg / var(--total))))
+              translate(100px)
+              rotate(calc(-1 * var(--index) * (360deg / var(--total))));
+  
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  
+    &.sucking {
+      animation: suck-to-center 2s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
+    }
+  }
+  
+  @keyframes suck-to-center {
+    0% {
+      transform: translate(100px) scale(1);
+      opacity: 1;
+      -webkit-transform: translate(100px) scale(1);
+      -moz-transform: translate(100px) scale(1);
+      -ms-transform: translate(100px) scale(1);
+      -o-transform: translate(100px) scale(1);
+}
+    50% {
+      transform: translate(100px,100px) scaleY(1.5) scaleX(0.8);
+      /*Stretcheffecttowardthecenter*/opacity: 0.8;
+      -webkit-transform: translate(100px,100px) scaleY(1.5) scaleX(0.8);
+      -moz-transform: translate(100px,100px) scaleY(1.5) scaleX(0.8);
+      -ms-transform: translate(100px,100px) scaleY(1.5) scaleX(0.8);
+      -o-transform: translate(100px,100px) scaleY(1.5) scaleX(0.8);
+}
+    100% {
+      transform: translate(0px) scale(0); /* Ends at the center */
+      opacity: 0;
+    }
+  }
+  
