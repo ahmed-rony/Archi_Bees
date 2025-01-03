@@ -1,0 +1,45 @@
+.delivery {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:  40px 60px;
+  border: 2px solid #ddd;
+//   text-align: center !important;
+  p {
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+    &:nth-of-type(2){
+        // padding-left: 10%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+  }
+  strong{
+    color: #ddd;
+  }
+
+  .middle{
+    display: flex;
+    gap: 40px;
+    padding-top: 60px;
+    .item{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        p{
+            text-align: center;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+    }
+  }
+  .bottom{
+    padding-top: 60px;
+  }
+}

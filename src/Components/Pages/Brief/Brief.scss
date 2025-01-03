@@ -2,64 +2,6 @@
   background: #222;
   color: #fff;
 
-  .container{
-    padding-bottom: 120px;
-    
-    .brief__header{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 40px;
-        padding-bottom: 80px;
-        p{
-            font-size: 18px;
-            font-weight: 300;
-            text-transform: uppercase;
-        }
-    }
-    .line_header{
-        font-size: 18px;
-        font-weight: 300;
-        text-transform: uppercase;
-        border-bottom: 2px solid #fff;
-        padding-bottom: 5px;
-    }
-    .brief__content{
-        display: flex;
-        padding-top: 40px;
-        gap: 40px;
-
-        .left{
-            flex: 1;
-            .section__title{
-                font-size: 80px;
-                font-weight: 700;
-                line-height: 75px;
-            }
-            .section__tagline{
-                font-size: 40px;
-                font-weight: 300;
-                padding-top: 20px;
-            }
-            .section__divider{
-                width: 100px;
-                height: 5px;
-                background: #fff;
-                margin-top: 80px;
-            }.section__author{
-                font-size: 18px;
-                font-weight: 400;
-                padding-top: 10px;
-            }
-        }
-        .right{
-            flex: 1;
-            p{
-                font-size: 18px;
-                font-weight: 300;
-                text-align: justify;
-            }
-        }
-    }
-  }
+  padding-bottom: 120px;
+  
 }

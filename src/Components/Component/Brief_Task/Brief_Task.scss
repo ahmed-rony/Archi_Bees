@@ -1,0 +1,128 @@
+.brief_task {
+  padding-top: 100px;
+  
+  ul {
+    list-style: circle;
+    padding-left: 40px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 300;
+    text-align: justify;
+  }
+  .content {
+    display: flex;
+    gap: 40px;
+
+    .left {
+      flex: 1.4;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      .item {
+        width: 100%;
+        display: flex;
+        gap: 20px;
+
+        .list_num {
+          h5 {
+            font-size: 70px;
+            font-weight: 700;
+            border: 1px solid #888888;
+            padding: 15px;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+          }
+        }
+        .list_desc {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          h4 {
+            font-size: 22px;
+            font-weight: 400;
+            text-transform: uppercase;
+          }
+
+          a {
+            color: #ffc107;
+          }
+        }
+      }
+    }
+    .right {
+      flex: 1;
+      position: relative;
+      img {
+        width: 50%;
+        position: absolute;
+        left: 20px;
+        top: 5%;
+        z-index: 1;
+
+        &:last-of-type {
+          left: inherit;
+          right: 5%;
+          top: 30%;
+          z-index: 0;
+        }
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+      }
+      h6 {
+        font-size: 24px;
+        font-weight: 400;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 20%;
+        right: 20%;
+        text-transform: uppercase;
+      }
+    }
+  }
+  .site {
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    .header_title {
+      padding-bottom: 20px;
+    }
+
+    .site_content {
+      display: flex;
+      gap: 40px;
+      .left {
+        flex: 1.3;
+      }
+      .right {
+        flex: 1;
+      }
+    }
+    .site_img {
+      padding-top: 40px;
+      // filter: grayscale(1);
+      // -webkit-filter: grayscale(1);
+    }
+  }
+  .evo_format {
+    display: flex;
+    gap: 40px;
+    padding-top: 100px;
+
+    .left,
+    .right {
+      flex: 1;
+    }
+  }
+}

@@ -1,16 +1,34 @@
 .team {
   padding-top: 120px;
   .container {
-    width: 85%;
+    width: 80%;
+    position: relative;
+    .sec_title{
+      position: inherit;
+      top: inherit;
+      // left: inherit;
+      // gap: 10px;
+      display: inline-flex;
+      text-align: center;
+      span{
+        // background: #222;
+        // color: #f2efe8;
+        // padding-left: 40px;
+        // padding-right: 5px;
+        // padding: 5px 5px 5px 30px;
+      }
+
+    }
   }
   .slick-slide {
     margin: 0 10px;
+    
 
     .slide_item {
       height: 200px;
       position: relative;
       overflow: hidden;
-
+      cursor: pointer;
       height: 400px;
       img {
         width: 100%;
@@ -38,16 +56,15 @@
         );
       }
       .team_info {
-        width: 90%;
         display: flex;
         align-items: center;
         position: absolute;
-        left: 30px;
+        left: 20px;
         bottom: 20px;
         color: #f2efe8;
-        z-index: 1;
-
+        
         h4 {
+          z-index: 1;
           display: flex;
           flex-direction: column;
           font-size: 18px;

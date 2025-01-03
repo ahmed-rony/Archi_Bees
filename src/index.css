@@ -4,6 +4,10 @@
   box-sizing: border-box;
   font-family: 'DecimaMonoPro', sans-serif;
 }
+::selection{
+  background: #FFC107;
+  color: #222;
+}
 body{
   background: #F2EFE8;
 }
@@ -26,6 +30,25 @@ a {
 .container{
   width: 80%;
   margin: 0 auto;
+}
+.sec_title {
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  position: absolute;
+  left: -75px;
+  top: 20px;
+  z-index: 9;
+}
+.header_title {
+  font-size: 40px;
+  font-weight: 300;
+  padding-bottom: 40px;
+  text-transform: uppercase;
 }
 
 /* =============  fonts  =============== */

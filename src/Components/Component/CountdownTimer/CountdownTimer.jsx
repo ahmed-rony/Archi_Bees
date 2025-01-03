@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./CountdownTimer.scss"; // Import the SCSS file
 
-const CountdownTimer = ({ hours = 0, minutes = 0, seconds = 0 }) => {
+const CountdownTimer = ({ hours = 0, minutes = 0, seconds = 0, shrink }) => {
   const [timeLeft, setTimeLeft] = useState({
     hours: hours,
     minutes: minutes,
@@ -36,7 +36,19 @@ const CountdownTimer = ({ hours = 0, minutes = 0, seconds = 0 }) => {
   const formatTime = (value) => (value < 10 ? `0${value}` : value);
 
   return (
-    <div className="countdown-container">
+    <div
+      className="countdown-container"
+      style={
+        shrink == "shrink"
+          ? {
+              transform: "scale(.7)",
+              paddingBottom: "0px",
+              color: "#fff",
+              marginRight: "-62px",
+            }
+          : { transform: "scale(1)" }
+      }
+    >
       <div className="timer-segment">
         <p className="time">{formatTime(timeLeft.hours)}</p>
         <p className="label">Hours</p>

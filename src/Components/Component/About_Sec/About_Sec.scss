@@ -14,19 +14,7 @@
     .left {
       flex: 1;
       position: relative;
-      .sec_title {
-        font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        position: absolute;
-        left: -75px;
-        top: 20px;
-        z-index: 9;
-      }
+      
       .about_img {
         img {
           width: 100%;
