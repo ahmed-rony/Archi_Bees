@@ -1,16 +1,24 @@
 import "./PublicationCard.scss";
-import { Link } from "react-router-dom";
 import { Publication_Data } from "../../Utils/Datas/Publication";
+import ArchiveModal from "../ArchiveModal/ArchiveModal";
+import { useState } from "react";
 
 const Publicationcard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
+
+  const toggleDrawer = (data = null) => {
+    setSelectedData(data);
+    setIsOpen((prevState) => !prevState);
+  };
   return (
     <>
       {Publication_Data?.map((data, i) => (
-        <Link to={"/"} key={i}>
+        <div to={"/"} key={i} onClick={() => toggleDrawer(data)}>
           <div className="Publication-item">
-            <img src={data?.PublicationCover} alt="" />
+            <img src={data?.projectPics[0]} alt="" />
             <div className="info">
-              <span>{data?.userName}</span>
+              <span>{data?.studentName}</span>
               <h4>
                 {data?.title?.length > 70
                   ? `${data?.title?.substring(0, 35)}..`
@@ -18,8 +26,13 @@ const Publicationcard = () => {
               </h4>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
+      <ArchiveModal
+        isOpen={isOpen}
+        toggleDrawer={() => toggleDrawer()}
+        data={selectedData}
+      />
     </>
   );
 };

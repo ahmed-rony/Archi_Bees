@@ -1,27 +1,64 @@
 import { useState } from "react";
 import "./Archive.scss";
+import ArchiveModal from "../../Component/ArchiveModal/ArchiveModal";
+import { ArchiveData } from "../../Utils/Datas/ArchiveData";
 
 const Archive = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchQuery, setSearchQuery] = useState(""); // Stores the term for filtering
   const [selectedYear, setSelectedYear] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
 
-  const data = [
-    { year: 2024, title: "Lorem ipsum dolor sit, amet consectetur adipisicing", school: "Harvard University" },
-    { year: 2023, title: "amet consectetur adipisicing", school: "Yale University" },
-    { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
-    { year: 2024, title: "Lorem ipsum dolor sit, amet consectetur adipisicing", school: "Harvard University" },
-    { year: 2023, title: "amet consectetur adipisicing", school: "Yale University" },
-    { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
-    { year: 2024, title: "Lorem ipsum dolor sit, amet consectetur adipisicing", school: "Harvard University" },
-    { year: 2023, title: "amet consectetur adipisicing", school: "Yale University" },
-    { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
-    { year: 2024, title: "Lorem ipsum dolor sit, amet consectetur adipisicing", school: "Harvard University" },
-    { year: 2023, title: "amet consectetur adipisicing", school: "Yale University" },
-    { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
-  ]
+  // const data = [
+  //   {
+  //     year: 2024,
+  //     title: "Lorem ipsum dolor sit, amet consectetur adipisicing",
+  //     school: "Harvard University",
+  //   },
+  //   {
+  //     year: 2023,
+  //     title: "amet consectetur adipisicing",
+  //     school: "Yale University",
+  //   },
+  //   { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
+  //   {
+  //     year: 2024,
+  //     title: "Lorem ipsum dolor sit, amet consectetur adipisicing",
+  //     school: "Harvard University",
+  //   },
+  //   {
+  //     year: 2023,
+  //     title: "amet consectetur adipisicing",
+  //     school: "Yale University",
+  //   },
+  //   { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
+  //   {
+  //     year: 2024,
+  //     title: "Lorem ipsum dolor sit, amet consectetur adipisicing",
+  //     school: "Harvard University",
+  //   },
+  //   {
+  //     year: 2023,
+  //     title: "amet consectetur adipisicing",
+  //     school: "Yale University",
+  //   },
+  //   { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
+  //   {
+  //     year: 2024,
+  //     title: "Lorem ipsum dolor sit, amet consectetur adipisicing",
+  //     school: "Harvard University",
+  //   },
+  //   {
+  //     year: 2023,
+  //     title: "amet consectetur adipisicing",
+  //     school: "Yale University",
+  //   },
+  //   { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
+  // ];
   // Advanced Filter Logic
-  const filteredData = data.filter((item) => {
+  
+  const filteredData = ArchiveData?.filter((item) => {
     const matchesSearchQuery =
       !searchQuery || // No search query
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) || // Matches title
@@ -42,63 +79,71 @@ const Archive = () => {
     }
   };
 
+  const toggleDrawer = (data = null) => {
+    setSelectedData(data);
+    setIsOpen((prevState) => !prevState);
+  };
+
   return (
-    <div className="archive">
-      <div className="container">
-        <div className="filter">
-          {/* Search Input */}
-          <input
-            type="text"
-            className="search-box"
-            placeholder="Search by Title or School"
-            value={searchTerm}
-            onChange={handleSearchInput}
-            onKeyDown={handleSearchSubmit} // Triggers filtering on "Enter"
-          />
+    <>
+      <div className="archive">
+        <div className="container">
+          <div className="filter">
+            {/* Search Input */}
+            <input
+              type="text"
+              className="search-box"
+              placeholder="Search by Title or School"
+              value={searchTerm}
+              onChange={handleSearchInput}
+              onKeyDown={handleSearchSubmit} // Triggers filtering on "Enter"
+            />
 
-          {/* Year Filter Dropdown */}
-          <select
-            className="year_filter"
-            name="years"
-            id="years"
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-          >
-            <option value="">All Years</option>
-            <option value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-          </select>
-        </div>
+            {/* Year Filter Dropdown */}
+            <select
+              className="year_filter"
+              name="years"
+              id="years"
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+            >
+              <option value="">All Years</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+            </select>
+          </div>
 
-        {/* Data Table */}
-        <table className="data-table">
-          <thead>
-            
-            <tr>
-              <th>Year</th>
-              <th>Title</th>
-              <th>School</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.length > 0 ? (
-              filteredData.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.year}</td>
-                  <td className="truncate">{item.title}</td>
-                  <td className="truncate">{item.school}</td>
-                </tr>
-              ))
-            ) : (
+          {/* Data Table */}
+          <table className="data-table">
+            <thead>
               <tr>
-                <td colSpan="3">No results found</td>
+                <th>Year</th>
+                <th>Title</th>
+                <th>School</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredData.length > 0 ? (
+                filteredData.map((data, index) => (
+                  <tr key={index} onClick={() => toggleDrawer(data)}>
+                    <td>{data?.year}</td>
+                    <td className="truncate">{data?.title}</td>
+                    <td className="truncate">{data?.school}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3">No results found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+      <ArchiveModal isOpen={isOpen}
+        toggleDrawer={() => toggleDrawer()} data={selectedData} />
+    </>
   );
 };
 

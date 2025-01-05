@@ -5,6 +5,8 @@ import Page404 from "./Page404/Page404";
 import Brief from "./Brief/Brief";
 import Archive from "./Archive/Archive";
 import PublicationPage from "./PublicationPage/PublicationPage";
+import NewsPage from "./NewsPage/NewsPage";
+import MemberModal from "../Component/MemberModal/MemberModal";
 
 const MainPage = () => {
   return (
@@ -16,6 +18,8 @@ const MainPage = () => {
             <Route path="/brief" element={<Brief />} />
             <Route path="/archive" element={<Archive />} />
             <Route path="/publication" element={<PublicationPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/1" element={<MemberModal />} />
             <Route path="*" element={<Page404 />} />
           </Route>
         </Routes>

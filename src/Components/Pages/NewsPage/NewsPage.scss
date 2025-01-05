@@ -1,0 +1,98 @@
+.blog_list {
+  padding-top: 80px;
+  padding-bottom: 120px;
+  .top {
+    align-items: center;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    .item {
+      display: flex;
+      align-items: center;
+      height: 400px;
+
+      .info {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .details_info {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          background: #fff;
+          padding: 40px;
+          position: absolute;
+          color: #222;
+          gap: 10px;
+          z-index: 9;
+          right: -30px;
+          box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.2), -0px -0px 12px #ffffff;
+
+          span {
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 2px;
+          }
+
+          h4 {
+            font-size: 22px;
+            font-weight: 700;
+          }
+
+          p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 22px;
+            padding-right: 20px;
+            text-align: justify;
+          }
+        }
+        &:hover {
+          ~ .image img {
+            transform: scale(1.05);
+          }
+        }
+      }
+
+      .image {
+        flex: 1;
+        overflow: hidden;
+        height: 100%;
+
+        img {
+          width: 100%;
+          object-fit: cover;
+          transform: scale(1);
+          transition: all linear 3s;
+          -webkit-transition: all linear 3s;
+          -moz-transition: all linear 3s;
+          -ms-transition: all linear 3s;
+          -o-transition: all linear 3s;
+          &:hover {
+            transform: scale(1.05);
+            -webkit-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+            -o-transform: scale(1.05);
+          }
+        }
+      }
+
+      &:nth-of-type(odd) {
+        flex-direction: row-reverse;
+        .info {
+          .details_info {
+            right: inherit;
+            left: -30px;
+          }
+        }
+      }
+    }
+  }
+}

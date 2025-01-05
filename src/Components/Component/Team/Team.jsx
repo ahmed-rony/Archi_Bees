@@ -1,14 +1,10 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "./Team.scss";
-import img01 from "/images/10.jpg";
-import { useState } from "react";
-import MemberModal from "../MemberModal/MemberModal";
+// import { useState } from "react";
+// import MemberModal from "../MemberModal/MemberModal";
 import Jury from "../Jury/Jury";
 
 const Team = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const [modalIsOpen, setModalIsOpen] = useState(false);
 
   // const openModal = () => {
   //   setModalIsOpen(true);
@@ -34,7 +30,7 @@ const Team = () => {
           <h2 className="sec_title">
             2<span>Team</span>
           </h2>
-          <Jury team={"team"}/>
+          <Jury team={"team"} />
           {/* <Slider {...settings}>
             <div className="slide_item" onClick={openModal}>
               <img src={img01} alt="" />
@@ -84,10 +80,7 @@ const Team = () => {
           {/* </Slider> */}
         </div>
       </div>
-      <MemberModal
-        modalIsOpen={modalIsOpen}
-        setModalIsOpen={setModalIsOpen}
-      />
+      {/* <MemberModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} /> */}
     </>
   );
 };

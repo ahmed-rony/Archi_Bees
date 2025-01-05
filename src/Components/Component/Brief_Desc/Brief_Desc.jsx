@@ -20,7 +20,14 @@ const Brief_Desc = () => {
           <p className="section__tagline">FESTIVAL DE CINE</p>
           <hr className="section__divider" />
           <p className="section__author">POR FEDERICO LUNA</p>
-          <Link to="/files/brief01.pdf" target="_blank" className="brief_pdf" download>DOWNLOAD BRIEF</Link>
+          <Link
+            to="/files/brief01.pdf"
+            target="_blank"
+            className="brief_pdf"
+            download
+          >
+            DOWNLOAD BRIEF
+          </Link>
         </div>
         <div className="right">
           <p className="section__description">
@@ -36,12 +43,13 @@ const Brief_Desc = () => {
             <strong>Sobre la temática...</strong> En la realización de una
             película se desarrollan muchos aspectos que los podemos agrupar en 3
             categorías: <strong>Fotografía, Arte y Narrativa.</strong> En la
-            mayoría de al producto final o simplemente, no se dan cuentalos casos, el espectador no aprecia estos aspectos que
-            enriquecen al producto final o simplemente, no se dan cuenta.
-            Entonces, el festival tiene como objetivo ser un disparador cultural
-            y otorgarle a los participantes un panorama más crítico a la hora de
-            ver una obra audiovisual para valorizar todas sus partes,
-            construyendo así, un cine de mayor calidad y exigencia.
+            mayoría de al producto final o simplemente, no se dan cuentalos
+            casos, el espectador no aprecia estos aspectos que enriquecen al
+            producto final o simplemente, no se dan cuenta. Entonces, el
+            festival tiene como objetivo ser un disparador cultural y otorgarle
+            a los participantes un panorama más crítico a la hora de ver una
+            obra audiovisual para valorizar todas sus partes, construyendo así,
+            un cine de mayor calidad y exigencia.
           </p>
         </div>
       </div>
