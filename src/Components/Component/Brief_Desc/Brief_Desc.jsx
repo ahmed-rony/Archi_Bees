@@ -1,8 +1,40 @@
 import { Link } from "react-router-dom";
 import CountdownTimer from "../CountdownTimer/CountdownTimer";
 import "./Brief_Desc.scss";
+import useTimer from "../../Utils/Hooks/TimeHook";
 
 const Brief_Desc = () => {
+  const timeLeft = useTimer("get-timer");
+
+  const downloadLastPdf = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:30000/api/briefPDF/download-last",
+        {
+          method: "GET",
+          credentials: "include", // Include cookies if necessary
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to download the PDF");
+      }
+
+      // Convert response to a blob and trigger download
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "brief.pdf"; // Default download name
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+    }
+  };
+
   return (
     <div className="brief_desc">
       <div className="brief__header">
@@ -12,7 +44,12 @@ const Brief_Desc = () => {
       </div>
       <div className="line_head">
         <h3 className="line_header">Museum Editorial</h3>
-        <CountdownTimer hours={120} minutes={0} seconds={0} shrink={"shrink"} />
+        <CountdownTimer
+          hours={timeLeft.hours}
+          minutes={timeLeft.minutes}
+          seconds={timeLeft.seconds}
+          shrink={"shrink"}
+        />
       </div>
       <div className="brief__content">
         <div className="left">
@@ -20,14 +57,14 @@ const Brief_Desc = () => {
           <p className="section__tagline">FESTIVAL DE CINE</p>
           <hr className="section__divider" />
           <p className="section__author">POR FEDERICO LUNA</p>
-          <Link
-            to="/files/brief01.pdf"
+          <button
+            // to="/files/brief01.pdf"
             target="_blank"
             className="brief_pdf"
-            download
+            onClick={downloadLastPdf}
           >
             DOWNLOAD BRIEF
-          </Link>
+          </button>
         </div>
         <div className="right">
           <p className="section__description">

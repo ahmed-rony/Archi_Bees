@@ -6,36 +6,7 @@
   border-radius: 10px;
   min-height: 100vh;
 
-  .filter {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin-bottom: 40px;
-
-    .search-box {
-      width: 50%;
-      padding: 15px;
-      font-size: 18px;
-      border: 1px solid #222;
-      outline: none;
-      transition: all 0.3s ease;
-      background: transparent;
-
-      &::placeholder {
-        color: #666;
-      }
-
-      &:focus {
-      }
-    }
-    .year_filter {
-      font-size: 18px;
-      border: 1px solid #222;
-      outline: none;
-      padding: 15px;
-      background: transparent;
-    }
-  }
+  
 
   .data-table {
     width: 100%;
@@ -114,5 +85,35 @@
         color: #101010;
       }
     }
+  }
+}
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+
+  .search-box {
+    width: 50%;
+    padding: 15px;
+    font-size: 18px;
+    border: 1px solid #222;
+    outline: none;
+    transition: all 0.3s ease;
+    background: transparent;
+
+    &::placeholder {
+      color: #666;
+    }
+
+    &:focus {
+    }
+  }
+  .year_filter {
+    font-size: 18px;
+    border: 1px solid #222;
+    outline: none;
+    padding: 15px;
+    background: transparent;
   }
 }

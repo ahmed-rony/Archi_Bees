@@ -1,84 +1,81 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./Archive.scss";
+import axios from "axios";
 import ArchiveModal from "../../Component/ArchiveModal/ArchiveModal";
-import { ArchiveData } from "../../Utils/Datas/ArchiveData";
+// import { ArchiveData } from "../../Utils/Datas/ArchiveData";
 
 const Archive = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchQuery, setSearchQuery] = useState(""); // Stores the term for filtering
-  const [selectedYear, setSelectedYear] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
 
-  // const data = [
-  //   {
-  //     year: 2024,
-  //     title: "Lorem ipsum dolor sit, amet consectetur adipisicing",
-  //     school: "Harvard University",
-  //   },
-  //   {
-  //     year: 2023,
-  //     title: "amet consectetur adipisicing",
-  //     school: "Yale University",
-  //   },
-  //   { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
-  //   {
-  //     year: 2024,
-  //     title: "Lorem ipsum dolor sit, amet consectetur adipisicing",
-  //     school: "Harvard University",
-  //   },
-  //   {
-  //     year: 2023,
-  //     title: "amet consectetur adipisicing",
-  //     school: "Yale University",
-  //   },
-  //   { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
-  //   {
-  //     year: 2024,
-  //     title: "Lorem ipsum dolor sit, amet consectetur adipisicing",
-  //     school: "Harvard University",
-  //   },
-  //   {
-  //     year: 2023,
-  //     title: "amet consectetur adipisicing",
-  //     school: "Yale University",
-  //   },
-  //   { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
-  //   {
-  //     year: 2024,
-  //     title: "Lorem ipsum dolor sit, amet consectetur adipisicing",
-  //     school: "Harvard University",
-  //   },
-  //   {
-  //     year: 2023,
-  //     title: "amet consectetur adipisicing",
-  //     school: "Yale University",
-  //   },
-  //   { year: 2022, title: "Dolor sit amet", school: "Stanford University" },
-  // ];
-  // Advanced Filter Logic
-  
-  const filteredData = ArchiveData?.filter((item) => {
-    const matchesSearchQuery =
-      !searchQuery || // No search query
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) || // Matches title
-      item.school.toLowerCase().includes(searchQuery.toLowerCase()); // Matches school
+  const [archive, setArchive] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
 
-    const matchesYear = !selectedYear || item.year.toString() === selectedYear;
+  console.log("archive:", archive);
+  // Filter states
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [year, setYear] = useState("");
 
-    return matchesSearchQuery && matchesYear; // Must match both filters
-  });
+  const fetchArchive = useCallback(async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(
+        "http://localhost:30000/api/archive",
+        {
+          params: {
+            page,
+            limit: 10,
+            searchQuery,
+            year,
+          },
+        }
+      );
 
-  const handleSearchInput = (e) => {
-    setSearchTerm(e.target.value);
-  };
 
-  const handleSearchSubmit = (e) => {
-    if (e.key === "Enter" && searchTerm.length >= 3) {
+      if (data && Array.isArray(data.archive)) {
+        setArchive(data.archive); // Always set fresh data
+        setTotalCount(data.totalCount);
+      } else {
+        setArchive([]); // Clear data if response is invalid
+      }
+    } catch (error) {
+      console.error("Error fetching student works", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [page, searchQuery, year]);
+
+  // Fetch data whenever filters or page change
+  useEffect(() => {
+    fetchArchive();
+  }, [page, searchQuery, year, fetchArchive]);
+
+  const handleSearchKeyPress = (e) => {
+    if (e.key === "Enter" && searchTerm.trim().length >= 3) {
       setSearchQuery(searchTerm);
+      setPage(1); // Reset to page 1 for new search
+    } else if (e.key === "Enter") {
+      console.log("Search query must be at least 3 characters long.");
     }
   };
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setPage(1); // Reset to page 1 for new search
+  };
 
+  const handleYearChange = (e) => {
+    setYear(e.target.value);
+    setPage(1); // Reset to page 1 for new filter
+  };
+
+  const loadMoreData = () => {
+    if (archive?.length < totalCount && !loading) {
+      setPage((prev) => prev + 1);
+    }
+  };
   const toggleDrawer = (data = null) => {
     setSelectedData(data);
     setIsOpen((prevState) => !prevState);
@@ -88,15 +85,16 @@ const Archive = () => {
     <>
       <div className="archive">
         <div className="container">
+          <h3 className="header_title">Archive</h3>
           <div className="filter">
             {/* Search Input */}
             <input
               type="text"
               className="search-box"
-              placeholder="Search by Title or School"
+              placeholder="Search by Name, Title or School"
               value={searchTerm}
-              onChange={handleSearchInput}
-              onKeyDown={handleSearchSubmit} // Triggers filtering on "Enter"
+              onChange={handleSearchChange}
+              onKeyDown={handleSearchKeyPress}
             />
 
             {/* Year Filter Dropdown */}
@@ -104,8 +102,8 @@ const Archive = () => {
               className="year_filter"
               name="years"
               id="years"
-              value={selectedYear}
-              onChange={(e) => setSelectedYear(e.target.value)}
+              value={year}
+              onChange={handleYearChange}
             >
               <option value="">All Years</option>
               <option value="2024">2024</option>
@@ -124,9 +122,18 @@ const Archive = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredData.length > 0 ? (
-                filteredData.map((data, index) => (
-                  <tr key={index} onClick={() => toggleDrawer(data)}>
+              {archive?.length > 0 ? (
+                archive?.map((data, index) => (
+                  <tr
+                    onScroll={(e) => {
+                      const isBottom =
+                        e.target.scrollHeight - e.target.scrollTop ===
+                        e.target.clientHeight;
+                      if (isBottom) loadMoreData();
+                    }}
+                    key={index}
+                    onClick={() => toggleDrawer(data)}
+                  >
                     <td>{data?.year}</td>
                     <td className="truncate">{data?.title}</td>
                     <td className="truncate">{data?.school}</td>
@@ -141,8 +148,11 @@ const Archive = () => {
           </table>
         </div>
       </div>
-      <ArchiveModal isOpen={isOpen}
-        toggleDrawer={() => toggleDrawer()} data={selectedData} />
+      <ArchiveModal
+        isOpen={isOpen}
+        toggleDrawer={() => toggleDrawer()}
+        data={selectedData}
+      />
     </>
   );
 };

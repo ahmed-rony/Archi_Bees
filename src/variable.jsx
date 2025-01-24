@@ -1,0 +1,10 @@
+export const BASENDPOINT = "http://localhost:30000/api";
+export const VerifyToken = "/verify-token";
+export const RegisterPoint = "/auth/register";
+export const AuthorizeUser = "/auth/login";
+export const RenewToken = "/auth/renew-token";
+export const DeAuthorizeToken = "/auth/logout";
+export const UPLOAD_CLOUDINARY = "/upload_Cloudinary";
+export const STUDENTWORK = "/studentWork";
+export const ARCHIVEPOINT = "/archive";
+export const NEWSPOINT = "/news";
